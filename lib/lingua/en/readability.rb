@@ -131,8 +131,13 @@ module Lingua
           # up frequency counts
           @frequencies[word] += 1
 
+
           # syllable counts
-          syllables = Lingua::EN::Syllable.syllables(word)
+          syllables = if match.match?(/[a-z][a-z\-']*/i)
+            Lingua::EN::Syllable.syllables(word)
+          else
+            match.length
+          end
           @syllables += syllables
           if syllables > 2 && !word.include?('-')
             @complex_words += 1 # for Fog Index
