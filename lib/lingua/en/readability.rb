@@ -135,7 +135,7 @@ module Lingua
           # syllable counts
           syllables = begin
             Lingua::EN::Syllable.syllables(word)
-          rescue =>
+          rescue => exception
             if numeric?
               number = word.include?(".") ? Float(word) : Integer(word)
               Lingua::EN::Syllable.syllables(number.humanize)
