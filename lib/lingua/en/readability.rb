@@ -136,7 +136,7 @@ module Lingua
           syllables = begin
             Lingua::EN::Syllable.syllables(word)
           rescue => exception
-            if numeric?
+            if numeric?(word)
               number = word.include?(".") ? Float(word) : Integer(word)
               Lingua::EN::Syllable.syllables(number.humanize)
             else
