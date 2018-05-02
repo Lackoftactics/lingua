@@ -137,6 +137,16 @@ describe Lingua::EN::Sentence do
       end
     end
 
+    describe 'count sentences by line break' do
+      it 'has 4 sentences' do
+        text = File.read('spec/fixtures/description3.txt')
+        sentences = klass.sentences(text)
+
+        p sentences
+        expect(sentences.count).to eq(28)
+      end
+    end
+
     describe "sentences with URLs and abbreviation" do
       before(:each) do
         text = "Many of these leading names now have their own website, e.g.  http://www.kaptest.com/. Hello, e.g. you don't know what you mean. I'm so angry about what you said about the U.S.A. or the u.S. or the U.S.S.R. ok. I ate cake on Dec. 21 for my birthday."

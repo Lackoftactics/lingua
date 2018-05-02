@@ -48,5 +48,7 @@ Gem::Specification.new do |s|
      "spec/lingua/en/sentence_spec.rb",
      "spec/spec_helper.rb"
   ]
+  s.add_dependency('activesupport')
   s.add_development_dependency('rspec', ['~> 3.7.0'])
+  s.add_development_dependency('pry')
 end

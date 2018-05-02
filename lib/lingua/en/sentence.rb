@@ -1,3 +1,5 @@
+require 'active_support'
+require 'active_support/core_ext/object/blank'
 module Lingua
   module EN
     # The class Lingua::EN::Sentence takes English text, and attempts to
@@ -31,6 +33,8 @@ module Lingua
       # Finds punctuation that ends paragraphs.
       PUNCTUATION_DETECT = /((?:[\.?!]|[\r\n]+)(?:\"|\'|\)|\]|\})?)(\s+)/ unless defined?(PUNCTUATION_DETECT)
 
+      PARAGRAPH = /(\n|^).*??=\n|$/ unless defined?(PARAGRAPH)
+
       CORRECT_ABBR = /(#{ABBR_DETECT})#{EOS}(\s+[a-z0-9])/
 
       # Split the passed text into individual sentences, trim these and return
@@ -46,9 +50,11 @@ module Lingua
         # We preserve the trailing whitespace ($2) so that we can
         # fix ellipses (...)!
         text.gsub!(PUNCTUATION_DETECT) { $1 << EOS << $2 }
-
         # Correct ellipsis marks.
         text.gsub!(/(\.\.\.*)#{EOS}/) { $1 }
+        text.gsub!(PARAGRAPH) { EOS }
+
+
 
         # Correct e.g, i.e. marks.
         text.gsub!(CORRECT_ABBR, "\\1\\2")
@@ -60,7 +66,7 @@ module Lingua
         # Remove empty sentences.
         text.split(EOS).
           map { |sentence| sentence.strip }.
-          delete_if { |sentence| sentence.nil? || sentence.empty? }
+          delete_if { |sentence| sentence.nil? || sentence.blank? }
       end
 
       # Adds a list of abbreviations to the list that's used to detect false
