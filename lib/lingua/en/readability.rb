@@ -133,10 +133,10 @@ module Lingua
 
 
           # syllable counts
-          syllables = if match.match?(/[a-z][a-z\-']*/i)
+          syllables = if word.match?(/[a-z][a-z\-']*/i)
             Lingua::EN::Syllable.syllables(word)
           else
-            match.length
+            word.length
           end
           @syllables += syllables
           if syllables > 2 && !word.include?('-')
