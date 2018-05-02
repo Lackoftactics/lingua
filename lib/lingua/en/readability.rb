@@ -1,3 +1,4 @@
+require 'humanize'
 module Lingua
   module EN
     # The class Lingua::EN::Readability takes English text and analyses formal
@@ -124,25 +125,34 @@ module Lingua
 
       private
       def count_words
-        @text.scan(/\b(\w+)\b/i).each do |match|
+        @text.scan(/\b([a-z\d][a-z\-'\d]*)\b/i).each do |match|
           word = match[0]
           @words << word
 
           # up frequency counts
           @frequencies[word] += 1
 
-
           # syllable counts
           syllables = if word.match?(/[a-z][a-z\-']*/i)
             Lingua::EN::Syllable.syllables(word)
           else
-            0
+            if numeric?(word)
+              number = word.include?(".") ? Float(word) : Integer(word)
+              Lingua::EN::Syllable.syllables(number.humanize)
+            else
+              0
+            end
           end
+
           @syllables += syllables
           if syllables > 2 && !word.include?('-')
             @complex_words += 1 # for Fog Index
           end
         end
+      end
+
+      def numeric?(word)
+         Float(word) != nil rescue false
       end
     end
   end
