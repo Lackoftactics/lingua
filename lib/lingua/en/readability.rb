@@ -133,10 +133,10 @@ module Lingua
           @frequencies[word] += 1
 
           # syllable counts
-          syllables = if word.match?(/[a-z][a-z\-']*/i)
+          syllables = begin
             Lingua::EN::Syllable.syllables(word)
-          else
-            if numeric?(word)
+          rescue =>
+            if numeric?
               number = word.include?(".") ? Float(word) : Integer(word)
               Lingua::EN::Syllable.syllables(number.humanize)
             else
