@@ -124,7 +124,7 @@ module Lingua
 
       private
       def count_words
-        @text.scan(/\b([a-z][a-z\-']*)\b/i).each do |match|
+        @text.scan(/\b(\w+)\b/i).each do |match|
           word = match[0]
           @words << word
 
