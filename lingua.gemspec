@@ -49,6 +49,7 @@ Gem::Specification.new do |s|
      "spec/spec_helper.rb"
   ]
   s.add_dependency('activesupport')
+  s.add_dependency('ruby_rhymes')
   s.add_development_dependency('rspec', ['~> 3.7.0'])
   s.add_development_dependency('pry')
 end

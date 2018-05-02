@@ -1,4 +1,4 @@
-require 'lingua/en/syllable/guess'
+require 'ruby_rhymes'
 
 module Lingua
   module EN
@@ -16,7 +16,7 @@ module Lingua
     # Lingua::EN::Syllable::Dictionary.
     module Syllable
       def self.syllables(word)
-        Guess::syllables word
+        word.to_phrase.syllables
       end
     end
   end

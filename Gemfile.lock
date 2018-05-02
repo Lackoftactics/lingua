@@ -3,6 +3,7 @@ PATH
   specs:
     lingua (0.6.2)
       activesupport
+      ruby_rhymes
 
 GEM
   remote: https://rubygems.org/
@@ -35,6 +36,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
+    ruby_rhymes (0.1.2)
     thread_safe (0.3.6)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
