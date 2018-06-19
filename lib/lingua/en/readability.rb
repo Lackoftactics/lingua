@@ -124,6 +124,7 @@ module Lingua
       end
 
       private
+
       def count_words
         @text.scan(/\b([a-z\d][a-z\-'\d]*)\b/i).each do |match|
           word = match[0]
@@ -137,10 +138,10 @@ module Lingua
             Lingua::EN::Syllable.syllables(word)
           rescue => exception
             if numeric?(word)
-              number = word.include?(".") ? Float(word) : Integer(word)
-              Lingua::EN::Syllable.syllables(number.humanize)
-            else
-              0
+            #   number = word.include?(".") ? Float(word) : Integer(word)
+            #   Lingua::EN::Syllable.syllables(number.humanize)
+            # else
+              1
             end
           end
 
