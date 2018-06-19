@@ -138,10 +138,11 @@ module Lingua
             Lingua::EN::Syllable.syllables(word)
           rescue => exception
             if numeric?(word)
-            #   number = word.include?(".") ? Float(word) : Integer(word)
-            #   Lingua::EN::Syllable.syllables(number.humanize)
-            # else
+              # number = word.include?(".") ? Float(word) : Integer(word)
+              # Lingua::EN::Syllable.syllables(number.humanize)
               1
+            else
+              0
             end
           end
 
